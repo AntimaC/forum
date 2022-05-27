@@ -1,0 +1,52 @@
+{% load static %}
+{% if user.is_superuser or user.is_staff %}
+<html lang="en" class="no-focus">
+    <head>
+        <link rel="stylesheet" id="css-main" href="{% static 'css1/codebase.min.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    </head>
+    <body>
+    <div id="page-container" class="sidebar-o sidebar-inverse side-scroll page-header-fixed main-content-narrow">
+           
+         {% include "instructor/sidebar.html" %}
+         {% include "instructor/admin_nav.html" %}
+            <!-- Main Container -->
+          <main id="main-container" style="background-color:white;">
+              <!-- Page Content -->
+             <div class="content">
+
+{% else %}
+  {% include "user/user_nav.html" %}
+{% endif %}
+{% load static %}
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+
+    <form method="POST">
+        <div class="form-group">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4 mt-4" style="margin-top:10%;">Update Post</legend>
+        </fieldset>
+         <label style="font-size:1rem; font-weight:bold;">Post Content</label>
+        {{form|crispy}}
+        <div class="form-group">
+            <button href="" class="btn btn-primary" type="Update">
+            Update
+            </button>
+        </div>
+    </div>
+    </form>
+</div>
+</div>
+</main>
+{% endblock body%}
